@@ -14,7 +14,7 @@
         </div>
 
         <div>
-            <button type="submit" @click="userLoggedIn" id='submit' value='Connectez-vous' ></button>
+            <button type="submit" @click="userLoggedIn" id='submit'>Connectez-vous</button>
         </div>
     </div>   
 </template>

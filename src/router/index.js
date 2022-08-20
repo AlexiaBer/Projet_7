@@ -15,6 +15,11 @@ const routes = [
     path: '/signin', //le chemin, l'url de la route
     name: 'signin',
     component: () => import('../views/Signin.vue') //le render quand un user visite la route
+  },
+  {
+    path: '/newsfeed', //le chemin, l'url de la route
+    name: 'newsfeed',
+    component: () => import('../views/Newsfeed.vue') //le render quand un user visite la route
   }
 
 ]

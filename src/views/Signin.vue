@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <input type="submit" id='submit' value='Créez un compte' >
+            <button type="submit" id='submit'>Créez un compte</button>
         </div>
 </template>
 <script>
