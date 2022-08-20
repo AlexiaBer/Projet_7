@@ -1,13 +1,22 @@
 <template>
+<img alt="logo du réseau social Groupomania" src="./assets/icon-left-font.png">
+<br />
+Bienvenue sur le réseau social Groupomania !
   <nav>
-    <!-- 
-      <router-link to="/">Home</router-link> 
-    -->
+ 
+      <router-link to="/signin">S'inscrire</router-link> | 
+      <router-link to="/login">Se connecter</router-link> 
+
   </nav>
   <router-view /> 
-  <!-- router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
+ router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
   -->
 </template>
+
+<script>
+
+</script>
+
 
 <style>
 #app {

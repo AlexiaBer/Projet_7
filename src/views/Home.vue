@@ -1,6 +1,6 @@
 <template>
    <div>
-        Bienvenue sur le réseau social Groupomania !
+        Bienvenue sur le réseau social Groupomania ! Ca c'est la page Home.vue dans VIEWS.
     </div>   
 
     <button @click="componentType = 'userLogin'">Se connecter</button> | <button>S'inscrire</button>
