@@ -9,11 +9,12 @@ Bienvenue sur le réseau social Groupomania !
 
   </nav>
   <router-view /> 
- router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
+ <!--router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
   -->
 </template>
 
 <script>
+
 
 </script>
 

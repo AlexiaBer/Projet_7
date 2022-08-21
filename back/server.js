@@ -1,5 +1,19 @@
 const http = require("http"); 
 const app = require('./app'); 
+const mysql = require("mysql2");
+
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Venusette27!",
+  database: "groupomania"
+});
+
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("Connecté à la base de données MySQL!");
+});
+
 const normalizePort = val => { 
   const port = parseInt(val,10);
   if (isNaN(port)) {

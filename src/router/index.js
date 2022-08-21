@@ -2,8 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
   {
-    path: '/',
-    name: 'signin',
+    path: '/home',
+    name: 'home',
     component: () => import('../views/Home.vue') //le render quand un user visite la route
   },
   {
