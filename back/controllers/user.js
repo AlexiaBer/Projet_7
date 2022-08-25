@@ -15,15 +15,47 @@ exports.signUp = (req, res, next) => {
     .then(hash => {
       console.log(hash + " hash");
       console.log(cryptedEmail + " cryptedEmail")
-    })
 
+      const user = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: cryptedEmail,
+        password: hash,
+      }
+
+      //requête SQL
+      mysql.query(
+      'INSERT INTO users SET ?', user, (error, results, fields)=> {
+        if(error) {
+          console.log(error);
+          res.json({ error });
+        } else {
+          console.log(" --> results");
+          console.log(results);
+          res.json({ message : "Utilisateur enregistré"});
+        }
+      })
+    })
     .catch(error => res.status(500).json({ error }));
 }
 
 // pour SE CONNECTER à son compte
 exports.signIn = (req, res, next) => { 
   const cryptedEmail = cryptoJs.HmacSHA256(req.body.email, "?cle1de2securite3!").toString();
-  User.findOne({ email: cryptedEmail })
+  mysql.query( //il faut chercher si l'user existe dans la BDD
+    'SELECT cryptedEmail FROM users', (error, results, fields)=> {
+      if(error) {
+        console.log(error);
+        res.json({ error });
+      } else {
+        console.log(" --> results");
+        console.log(results);
+        res.json({ message : "Utilisateur trouvé"});
+      }
+    })
+  
+
+
   .then(user => {
     if (user == null) { // l'user n'existe pas dans la BDD
       res.status(401).json({ message : "Paire identifiant/mot de passe incorrecte" });

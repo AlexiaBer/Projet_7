@@ -1,21 +1,34 @@
 <template>
 <img alt="logo du réseau social Groupomania" src="./assets/icon-left-font.png">
 <br />
-Bienvenue sur le réseau social Groupomania !
-  <nav>
- 
-      <router-link to="/signin">S'inscrire</router-link> | 
-      <router-link to="/login">Se connecter</router-link> 
+Bienvenue sur le réseau social Groupomania ! <br>
 
-  </nav>
-  <router-view /> 
+<Signup @addUser="saveUser" />
+  <nav> 
+      <router-link to="/signup" >S'inscrire</router-link> | 
+      <router-link to="/login">Se connecter</router-link> 
+  </nav><br>
+  <router-view> </router-view>
  <!--router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
   -->
 </template>
 
 <script>
-
-
+import Signup from "@/components/Signup.vue";
+export default {
+  name: "App",
+  components: {
+    Signup,
+  },
+  setup() {
+    const saveUser = function(data) {
+    console.log("App saveUser on regarde ce que vaut data", data);
+    }
+    return {
+      saveUser //on veut rendre accessible cette méthode à notre template donc on la met dans un return
+    }
+  }
+}
 </script>
 
 

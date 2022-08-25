@@ -14,13 +14,13 @@
         </div>
 
         <div>
-            <button type="submit" @click="userLoggedIn" id='submit'>Connectez-vous</button>
+            <button type="submit" @add="userLoggedIn" id='submit'>Connectez-vous</button>
         </div>
     </div>   
 </template>
 
 <script>    
-import { ref } from 'vue';
+/*import { ref } from 'vue';
 export default {
 
     setup(props, ctx) { // entre les parenthèses : le ctx (contexte) permet de mettre à dispo la methode ctx.emit pour 
@@ -40,7 +40,7 @@ export default {
             userLoggedIn,
         }
     }
-}
+}*/
 </script>
 
 <style>

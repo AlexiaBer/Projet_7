@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: () => import('../views/Home.vue') //le render quand un user visite la route
   },
@@ -12,16 +12,15 @@ const routes = [
     component: () => import('../views/Login.vue') //le render quand un user visite la route
   },
   {
-    path: '/signin', //le chemin, l'url de la route
-    name: 'signin',
-    component: () => import('../views/Signin.vue') //le render quand un user visite la route
+    path: '/signup', //le chemin, l'url de la route
+    name: 'signup',
+    component: () => import('../views/Signup.vue') //le render quand un user visite la route
   },
   {
     path: '/newsfeed', //le chemin, l'url de la route
     name: 'newsfeed',
     component: () => import('../views/Newsfeed.vue') //le render quand un user visite la route
   }
-
 ]
 
 const router = createRouter({

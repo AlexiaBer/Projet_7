@@ -1,28 +1,9 @@
-/* const mysql = require('mysql');
-
-const db = mysql.createConnection({
-
-    host: "localhost",
- 
-    user: "root@localhost",
- 
-    password: "Venusette27!"
- 
-  });
-
-  db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connecté à la base de données MySQL!");
-  });
-
-  */
-
 const express = require('express'); 
 const bodyParser = require('body-parser');
 
 const path = require('path');
 
-//const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 
 const app = express();
@@ -37,8 +18,9 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-//app.use('/api/auth', userRoutes);
-//app.use('/api/sauces', sauceRoutes);
+//app.use('/api/auth', userRoutes); //la base de l'url pour toutes les routes concernant les users
+app.use('/api/posts', postRoutes); //la base de l'url pour toutes les routes concernant les posts
+
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app; 
