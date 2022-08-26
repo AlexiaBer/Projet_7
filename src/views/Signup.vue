@@ -44,6 +44,9 @@ export default {
             // (lastName.value, firstName.value, email.value, password.value, "null", "null")
          //   }
 
+
+         
+
           ctx.emit("addUser", lastName.value, firstName.value, email.value, password.value);
     //      users.value = [...users.value, { user: data, id: Date.now() }];
           console.log(lastName.value, firstName.value, email.value, password.value);

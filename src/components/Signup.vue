@@ -27,41 +27,37 @@
 </template>
 <script>
 import { ref } from 'vue';
+import { useUserStore } from '../stores/user';
+
 export default {
-    setup(props, ctx) { // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
+    setup() { // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
      // const users = ref([]);
       let lastName = ref(""); //ref permet de rendre la donnée dynamique est donc récupérable
       let firstName = ref("");
       let email = ref("");
       let password = ref("");
-
+    
       const saveUser = function(data) {
-
-          const userInfo = document.querySelector(".lastname");
-          fetch(userInfo)
-          .then(function(response) {
-              return response;
-          })
-          .then(function(test){
-              const lastnameurl = URL.createObjectURL(test);
-              console.log(lastnameurl);
-              userInfo.src = lastnameurl;
-              console.log(lastnameurl);
-          })
-         
-          ctx.emit("addUser", [lastName.value, firstName.value, email.value]);
-    //      users.value = [...users.value, { user: data, id: Date.now() }];
-          console.log(lastName.value, firstName.value, email.value, password.value);
-          lastName.value = "";
-          firstName.value = "";
-          email.value = "";
-          password.value = "";
+        console.log(saveUser)
+        useUserStore().signup({lastName: lastName.value, firstName: firstName.value, email: email.value, password: password.value})
       }
-    return {
-        lastName, firstName, email, password, saveUser
-    }
-  },
+            
   }
+  
+}
+
+
+// RECUPERER LES DONNEES DE L'API POUR LES TRANSFERER DANS LA BDD
+
+/*
+
+fetch("http://localhost:5500/api/users")
+.catch(error => console.log(error))
+.then(data => data.json())
+.then(nomDeMaFonction => {
+    la fonction qui envoie les données vers la BDD SQL.
+})
+*/
 
 </script>
 

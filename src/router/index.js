@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/signup', //le chemin, l'url de la route
     name: 'signup',
-    component: () => import('../views/Signup.vue') //le render quand un user visite la route
+    component: () => import('../components/Signup.vue') //le render quand un user visite la route
   },
   {
     path: '/newsfeed', //le chemin, l'url de la route

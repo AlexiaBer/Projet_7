@@ -2,13 +2,15 @@
 <img alt="logo du réseau social Groupomania" src="./assets/icon-left-font.png">
 <br />
 Bienvenue sur le réseau social Groupomania ! <br>
-
-<Signup @addUser="saveUser" />
   <nav> 
       <router-link to="/signup" >S'inscrire</router-link> | 
       <router-link to="/login">Se connecter</router-link> 
   </nav><br>
-  <router-view> </router-view>
+   <router-view> </router-view>
+
+  <Signup />
+
+ 
  <!--router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
   -->
 </template>

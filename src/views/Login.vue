@@ -41,6 +41,21 @@ export default {
         }
     }
 }*/
+
+router.get('/api/users/', (req,res) => {
+    const body = req.body
+    const userEmail = userEmail.value
+    fetch(`http://localhost:5500/api/users`)
+    .catch(console.log({ error }))
+    .then(data => data.json())
+    .then(checkEmail => {
+        userEmail 
+    }
+    )
+
+})
+
+
 </script>
 
 <style>
