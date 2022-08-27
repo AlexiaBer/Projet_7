@@ -32,18 +32,21 @@ import { useUserStore } from '../stores/user';
 export default {
     setup() { // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
      // const users = ref([]);
-      let lastName = ref(""); //ref permet de rendre la donnée dynamique est donc récupérable
+      let lastName = ref(""); //ref permet de rendre la donnée dynamique et donc récupérable
       let firstName = ref("");
       let email = ref("");
       let password = ref("");
     
-      const saveUser = function(data) {
-        console.log(saveUser)
-        useUserStore().signup({lastName: lastName.value, firstName: firstName.value, email: email.value, password: password.value})
+      const saveUser = function() {
+        useUserStore().signup({lastName: lastName.value, firstName: firstName.value, email: email.value, password: password.value}),
+        console.log(lastName.value + firstName.value + email.value + password.value)
+      }
+      return {
+          saveUser,
+          lastName: lastName.value, firstName: firstName.value, email: email.value, password: password.value
       }
             
   }
-  
 }
 
 

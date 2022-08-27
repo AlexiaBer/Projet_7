@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia' //crée le store
 
+import axios from 'axios';
 
 export const useUserStore = defineStore('user', { //on nomme le store
   state: () => {
@@ -11,7 +12,7 @@ export const useUserStore = defineStore('user', { //on nomme le store
     login(){ //savoir sur quelle page on est
         axios({
             method: 'get',
-            url: 'http://localhost:3000/api/posts',
+            url: 'http://localhost:3000/api/users',
             responseType: 'json'
           })
             .then(function (response) {
