@@ -1,28 +1,41 @@
 <template>
-   <div>
-        Bienvenue sur le réseau social Groupomania ! Ca c'est la page Home.vue dans VIEWS.
-    </div>   
+<img alt="logo du réseau social Groupomania" src="../assets/icon-left-font.png">
+<br />
+Bienvenue sur le réseau social Groupomania ! <br>
+  <nav> 
+      <router-link to="/signup" >S'inscrire</router-link> | 
+      <router-link to="/login">Se connecter</router-link> 
+  </nav><br>
+   <router-view> </router-view>
 
-    <button @click="componentType = 'userLogin'">Se connecter</button> | <button>S'inscrire</button>
-
-
+ <!--router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
+  -->
 </template>
 
-<script>  
-// import { ref } from 'vue';
-
-
- //   setup() { 
-        
-//     }
-
-//      return {
-
- //       }
+<script>
 
 </script>
 
+
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
+nav {
+  padding: 30px;
+}
 
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>

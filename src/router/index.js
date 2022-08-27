@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/login', //le chemin, l'url de la route
     name: 'login',
-    component: () => import('../views/Login.vue') //le render quand un user visite la route
+    component: () => import('../components/Login.vue') //le render quand un user visite la route
   },
   {
     path: '/signup', //le chemin, l'url de la route

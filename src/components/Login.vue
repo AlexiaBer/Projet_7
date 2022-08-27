@@ -40,7 +40,7 @@ export default {
             userLoggedIn,
         }
     }
-}*/
+}
 
 router.get('/api/users/', (req,res) => {
     const body = req.body
@@ -54,7 +54,7 @@ router.get('/api/users/', (req,res) => {
     )
 
 })
-
+*/
 
 </script>
 
