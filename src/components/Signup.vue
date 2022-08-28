@@ -1,54 +1,90 @@
-<template> 
-    <h2>Inscription</h2>
-                  
-        <div>
-            <label><b>Nom</b></label>
-            <input type="text" placeholder="ex : Dupuis" name="lastname" v-model="lastName" class="lastname" required>
-        </div>
+<template>
+  <h2>Inscription</h2>
 
-        <div>
-            <label><b>Prénom</b></label>
-            <input type="text" placeholder="ex : Aurélie" name="firstname" v-model="firstName" required>
-        </div>
+  <div>
+    <label><b>Nom</b></label>
+    <input
+      type="text"
+      placeholder="ex : Dupuis"
+      name="lastname"
+      v-model="lastName"
+      class="lastname"
+      required
+    />
+  </div>
 
-        <div>
-            <label><b>Adresse e-mail</b></label>
-            <input type="text" placeholder="ex : dupuis.aurelie@groupomania.fr" name="email" v-model="email" required>
-        </div>
+  <div>
+    <label><b>Prénom</b></label>
+    <input
+      type="text"
+      placeholder="ex : Aurélie"
+      name="firstname"
+      v-model="firstName"
+      required
+    />
+  </div>
 
-        <div>
-            <label><b>Mot de passe</b></label>
-            <input type="password" placeholder="Votre mot de passe" name="password" v-model="password" required>
-        </div>
+  <div>
+    <label><b>Adresse e-mail</b></label>
+    <input
+      type="text"
+      placeholder="ex : dupuis.aurelie@groupomania.fr"
+      name="email"
+      v-model="email"
+      required
+    />
+  </div>
 
-        <div>
-            <button @click="saveUser" type="submit" id='submit'>Créez un compte</button>
-        </div>
+  <div>
+    <label><b>Mot de passe</b></label>
+    <input
+      type="password"
+      placeholder="Votre mot de passe"
+      name="password"
+      v-model="password"
+      required
+    />
+  </div>
+
+  <div>
+    <button @click="saveUser" type="submit" id="submit">Créez un compte</button>
+  </div>
 </template>
 <script>
-import { ref } from 'vue';
-import { useUserStore } from '../stores/user';
 
+import { useUserStore } from "../stores/user";
+import { ref } from "vue";
 export default {
-    setup() { // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
-     // const users = ref([]);
-      let lastName = ref(""); //ref permet de rendre la donnée dynamique et donc récupérable
-      let firstName = ref("");
-      let email = ref("");
-      let password = ref("");
-    
-      const saveUser = function() {
-        useUserStore().signup({lastName: lastName.value, firstName: firstName.value, email: email.value, password: password.value}),
-        console.log(lastName.value + firstName.value + email.value + password.value)
-      }
-      return {
-          saveUser,
-          lastName: lastName.value, firstName: firstName.value, email: email.value, password: password.value
-      }
-            
-  }
-}
+  setup() {
+    // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
+    // const users = ref([]);
+    let lastName = ref(""); //ref permet de rendre la donnée dynamique et donc récupérable
+    let firstName = ref("");
+    let email = ref("");
+    let password = ref("");
 
+    const saveUser = function () {
+      console.log(
+        lastName.value + firstName.value + email.value + password.value
+        ),
+        useUserStore().signup({
+          lastName: lastName.value,
+          firstName: firstName.value,
+          email: email.value,
+          password: password.value,
+        });
+    };
+    return {
+      //on retourne ce qu'on veut rendre disponible
+      lastName,
+      firstName,
+      email,
+      password,
+      saveUser,
+      useUserStore
+    };
+  },
+};
 
 // RECUPERER LES DONNEES DE L'API POUR LES TRANSFERER DANS LA BDD
 
@@ -61,11 +97,10 @@ fetch("http://localhost:5500/api/users")
     la fonction qui envoie les données vers la BDD SQL.
 })
 */
-
 </script>
 
 <style scoped>
 h2 {
-    color:red;
+  color: red;
 }
 </style>

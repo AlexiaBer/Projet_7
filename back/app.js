@@ -18,7 +18,7 @@ app.use((req, res) => {
 
 app.use(bodyParser.json());
 
-//app.use('/api/auth', userRoutes); //la base de l'url pour toutes les routes concernant les users
+app.use('/api/auth', userRoutes); //la base de l'url pour toutes les routes concernant les users
 app.use('/api/posts', postRoutes); //la base de l'url pour toutes les routes concernant les posts
 
 //app.use('/images', express.static(path.join(__dirname, 'images')));
