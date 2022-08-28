@@ -1,5 +1,7 @@
 <template>
+<div class="logo">
 <img alt="logo du réseau social Groupomania" src="../assets/icon-left-font.png">
+</div>
 <br />
 Bienvenue sur le réseau social Groupomania ! <br>
   <nav> 
@@ -23,9 +25,13 @@ Bienvenue sur le réseau social Groupomania ! <br>
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color:cornsilk;
 }
 
+body {
+  background-color:#2c3e50;
+
+}
 nav {
   padding: 30px;
 }
@@ -37,5 +43,15 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+img {
+  height:20%;
+
+}
+
+.logo {
+  display:flex;
+  justify-content: center;
 }
 </style>

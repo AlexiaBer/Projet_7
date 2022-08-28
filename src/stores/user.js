@@ -30,7 +30,27 @@ export const useUserStore = defineStore('user', { //on nomme le store
     },
 
     signup(form) { 
-   /*   axios.post('http://localhost:3000/api/users', {
+
+ /*     fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+          firstName: form.firstName,
+          lastName: form.lastName
+        }),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+          'Access-Control-Allow-Origin':'*',
+          'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
+          'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+          'Cross-Origin-Resource-Policy': 'same-site'
+        }
+      })
+      .then(response => response.json())
+      .then(json => console.log(json));
+      */
+     axios.post('http://localhost:3000/api/users', {
         email: form.email,
         password: form.password,
         firstName: form.firstName,
@@ -42,7 +62,7 @@ export const useUserStore = defineStore('user', { //on nomme le store
       .catch(function(error) {
         console.log(error);
       });
-*/
+/*
         axios({
             method: 'post',
             url: 'http://localhost:3000/api/users',
@@ -59,7 +79,8 @@ export const useUserStore = defineStore('user', { //on nomme le store
   //          .catch(function(error) {
   //          console.log(error);
    //   });
-
+*/
     },
   },
+
 })
