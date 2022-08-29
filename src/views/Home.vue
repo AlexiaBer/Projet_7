@@ -1,9 +1,9 @@
 <template>
-<div class="logo">
-<img alt="logo du réseau social Groupomania" src="../assets/icon-left-font.png">
-</div>
-<br />
-Bienvenue sur le réseau social Groupomania ! <br>
+  <header class="header">
+    <img alt="logo du réseau social Groupomania" src="../assets/small-transp-rectangle-black-icon.png">
+  </header>
+  <br />
+    <p>Bienvenue sur le réseau social Groupomania !</p> <br>
   <nav> 
       <router-link to="/signup" >S'inscrire</router-link> | 
       <router-link to="/login">Se connecter</router-link> 
@@ -21,37 +21,35 @@ Bienvenue sur le réseau social Groupomania ! <br>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color:cornsilk;
 }
 
 body {
-  background-color:#2c3e50;
-
+  background-color:#4E5166;
+  margin:0;
 }
+
 nav {
   padding: 30px;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color:white;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+p {
+    color:white;
 }
 
-img {
-  height:20%;
-
-}
-
-.logo {
+.header {
   display:flex;
   justify-content: center;
+  background-color:#FFD7D7;
+  padding:0px 30px;
 }
+
 </style>

@@ -1,5 +1,11 @@
 <template>
-   <div>
+
+    <header class="header">
+        <nav> <a href="../Home.vue">Retour accueil</a></nav>
+        <img alt="logo du réseau social Groupomania" src="../assets/small-transp-rectangle-black-icon.png">
+    </header>
+
+    <div class="form">
               <!-- zone de connexion -->                        
         <h2>Connexion</h2>
         
@@ -60,5 +66,35 @@ router.get('/api/users/', (req,res) => {
 
 <style>
 
+body {
+    background-color:#4E5166;
+}
+
+a {
+    color:#4E5166;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  background-color:#FFD7D7;
+  color:#4E5166;
+  padding:0px 30px;
+}
+
+h2 {
+    color: #FFD7D7;
+}
+
+.form {
+    color:#FFD7D7;
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+label {
+  padding:30px;
+}
 
 </style>
