@@ -10,12 +10,10 @@
         <h2>Connexion</h2>
         
         <div>
-            <label><b>Adresse e-mail</b></label>
             <input type="text" placeholder="Adresse e-mail" name="email" v-model="userEmail" required>
         </div>
 
         <div>
-            <label><b>Mot de passe</b></label>
             <input type="password" placeholder="Votre mot de passe" name="password" required>
         </div>
 
@@ -93,8 +91,17 @@ h2 {
     gap:20px;
 }
 
-label {
-  padding:30px;
+::placeholder {
+  color:#4E5166;
+  font-weight: bold;
+  font-size: 16px;
+  margin:30px;
+  text-align:center;
+}
+
+input {
+  padding:10px;
+  border-radius:8px;
 }
 
 button {
@@ -103,6 +110,7 @@ button {
   padding:15px;
   font-weight: bold;
   border-radius: 30px;
+  font-size:16px;
 }
 
 </style>

@@ -5,14 +5,14 @@
         <img alt="logo du réseau social Groupomania" src="../assets/small-transp-rectangle-black-icon.png">
     </header>
   
-    <h2>Inscription</h2>
+    <h2>Venez échanger avec vos collègues de travail !</h2>
+    <p>Inscription</p>
 
     <div class="form">
       <div>
-        <label><b>Nom</b></label>
         <input
           type="text"
-          placeholder="ex : Dupuis"
+          placeholder="Nom"
           name="lastname"
           v-model="lastName"
           class="lastname"
@@ -21,10 +21,9 @@
     </div>
 
     <div>
-      <label><b>Prénom</b></label>
       <input
         type="text"
-        placeholder="ex : Aurélie"
+        placeholder="Prénom"
         name="firstname"
         v-model="firstName"
         required
@@ -32,10 +31,9 @@
     </div>
 
     <div>
-      <label><b>Adresse e-mail</b></label>
       <input
         type="text"
-        placeholder="ex : dupuis.aurelie@groupomania.fr"
+        placeholder="Adresse e-mail"
         name="email"
         v-model="email"
         required
@@ -43,10 +41,9 @@
     </div>
 
     <div>
-      <label><b>Mot de passe</b></label>
       <input
         type="password"
-        placeholder="Votre mot de passe"
+        placeholder="Mot de passe"
         name="password"
         v-model="password"
         required
@@ -109,7 +106,8 @@ fetch("http://localhost:5500/api/users")
 
 <style scoped>
 h2 {
-  color: white;
+  padding-top:30px;
+  color: #FFD7D7;
 }
 
 body {
@@ -135,16 +133,26 @@ a {
     gap:20px;
 }
 
-label {
-  padding:30px;
+::placeholder {
+  color:#4E5166;
+  font-weight: bold;
+  font-size: 16px;
+  margin:30px;
+  text-align:center;
+}
+
+input {
+  padding:10px;
+  border-radius:8px;
 }
 
 button {
-  background-color:#FFD7D7;
+  background-color:#FD2D01;
   color:#4E5166;
   padding:15px;
   font-weight: bold;
   border-radius: 30px;
+  font-size:16px;
 }
 
 </style>

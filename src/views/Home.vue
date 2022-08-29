@@ -30,6 +30,7 @@
 body {
   background-color:#4E5166;
   margin:0;
+  font-size:20px;
 }
 
 nav {
@@ -43,6 +44,7 @@ nav a {
 
 p {
     color:white;
+    font-size:20px;
 }
 
 .header {
