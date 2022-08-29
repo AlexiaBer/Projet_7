@@ -1,8 +1,10 @@
 <template>
+  
     <header class="header">
         <nav> <a href="../Home.vue">Retour accueil</a></nav>
         <img alt="logo du réseau social Groupomania" src="../assets/small-transp-rectangle-black-icon.png">
     </header>
+  
     <h2>Inscription</h2>
 
     <div class="form">
@@ -107,11 +109,10 @@ fetch("http://localhost:5500/api/users")
 
 <style scoped>
 h2 {
-  color: #FFD7D7;
+  color: white;
 }
 
 body {
-    color:white;
     background-color:#4E5166;
 }
 
@@ -128,7 +129,7 @@ a {
 }
 
 .form {
-    color:#FFD7D7;
+    color:white;
     display:flex;
     flex-direction: column;
     gap:20px;
@@ -136,6 +137,14 @@ a {
 
 label {
   padding:30px;
+}
+
+button {
+  background-color:#FFD7D7;
+  color:#4E5166;
+  padding:15px;
+  font-weight: bold;
+  border-radius: 30px;
 }
 
 </style>

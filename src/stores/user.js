@@ -17,6 +17,7 @@ export const useUserStore = defineStore('user', { //on nomme le store
         .catch(function(error) {
           console.log(error);
         })
+      },
   /*    axios({
             method: 'get',
             url: 'http://localhost:3000/api/users',
@@ -27,9 +28,6 @@ export const useUserStore = defineStore('user', { //on nomme le store
             });
 */
   
-    },
-
-    signup(form) { 
 
  /*     fetch("http://localhost:3000/api/users", {
         method: "POST",
@@ -50,18 +48,29 @@ export const useUserStore = defineStore('user', { //on nomme le store
       .then(response => response.json())
       .then(json => console.log(json));
       */
-     axios.post('http://localhost:3000/api/users', {
-        email: form.email,
-        password: form.password,
-        firstName: form.firstName,
-        lastName: form.lastName
-      })
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+      signup(form) { 
+
+        const postRequest = {
+          email: form.email,
+          password: form.password,
+          firstName: form.firstName,
+          lastName: form.lastName
+          }
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer' // + token
+            }
+    
+        axios.post('http://localhost:3000/api/users', postRequest, { headers })
+          .then(res => console.log('succesfull')) 
+          .catch(function(error) {
+              console.log(error.message);    
+            })
+        }
+
+      }
+    })
 /*
         axios({
             method: 'post',
@@ -80,7 +89,3 @@ export const useUserStore = defineStore('user', { //on nomme le store
   //          console.log(error);
    //   });
 */
-    },
-  },
-
-})

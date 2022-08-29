@@ -83,11 +83,11 @@ a {
 }
 
 h2 {
-    color: #FFD7D7;
+    color: white;
 }
 
 .form {
-    color:#FFD7D7;
+    color:white;
     display:flex;
     flex-direction: column;
     gap:20px;
@@ -95,6 +95,14 @@ h2 {
 
 label {
   padding:30px;
+}
+
+button {
+  background-color:#FFD7D7;
+  color:#4E5166;
+  padding:15px;
+  font-weight: bold;
+  border-radius: 30px;
 }
 
 </style>
