@@ -1,11 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const router = require("express").Router();
 const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
 const userCtrl = require('../controllers/user');
 
-router.post('/', userCtrl.signUp); //auth, multer avant userCtrl
+router.post('/register', userCtrl.signUp); //auth, multer avant userCtrl LA route entière : http://localhost:8080/api/users/register (voir ligne 48 de app.js)
 router.get('/', auth, userCtrl.login);
 router.put('/', auth, multer, userCtrl.modifyUser); //multer après auth
 router.delete('/', auth, userCtrl.deleteUser);

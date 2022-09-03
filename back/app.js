@@ -6,6 +6,8 @@ const path = require('path');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 
+const mysql = require("./database/db.mysql");
+
 const cors = require('cors');
 const app = express();
 
@@ -42,6 +44,7 @@ app.use((req, res) => {
   */
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));
 
 app.use('/api/users', userRoutes); //la base de l'url pour toutes les routes concernant les users
 app.use('/api/posts', postRoutes); //la base de l'url pour toutes les routes concernant les posts

@@ -28,11 +28,9 @@ export const useUserStore = defineStore('user', { //on nomme le store
             });
 */
   
-
-    
       signup(form) { 
 
-        fetch("http://localhost:3000/api/users", {
+        fetch("http://localhost:3000/api/users/register", {
           method: "POST",
           body: JSON.stringify({
             "email": form.email,
