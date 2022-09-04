@@ -63,10 +63,10 @@ export default {
   setup() {
     // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
     // const users = ref([]);
-    let lastName = ref(""); //ref permet de rendre la donnée dynamique et donc récupérable
-    let firstName = ref("");
-    let email = ref("");
-    let password = ref("");
+    const lastName = ref(""); //ref permet de rendre la donnée dynamique et donc récupérable
+    const firstName = ref("");
+    const email = ref("");
+    const password = ref(""); //anciennement tous "let"
 
     const saveUser = function () {
       console.log(
@@ -77,7 +77,17 @@ export default {
           firstName: firstName.value,
           email: email.value,
           password: password.value,
-        });
+        })
+        .then((data) => {
+          console.log(data);
+          //redirection new page ICI
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        
+        ;
+      
     };
     return {
       //on retourne ce qu'on veut rendre disponible

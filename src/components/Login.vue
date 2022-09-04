@@ -18,12 +18,36 @@
         </div>
 
         <div>
-            <button type="submit" @add="userLoggedIn" id='submit'>Connectez-vous</button>
+            <button type="submit" @click="userLoggedIn" id='submit'>Connectez-vous</button>
         </div>
     </div>   
 </template>
 
 <script>    
+
+import { useUserStore } from "../stores/user";
+import { ref } from "vue";
+export default {
+    setup() {
+    const email = ref("");//ref permet de rendre la donnée dynamique et donc récupérable
+    const password = ref("");
+    
+    const userLoggedIn = function () {
+      console.log(email.value + password.value),
+        useUserStore().login({
+          email: email.value,
+          password: password.value,
+        });
+    };
+    return {
+      //on retourne ce qu'on veut rendre disponible
+      email,
+      password,
+      userLoggedIn,
+      useUserStore
+    };
+    }
+}
 /*import { ref } from 'vue';
 export default {
 
@@ -46,18 +70,6 @@ export default {
     }
 }
 
-router.get('/api/users/', (req,res) => {
-    const body = req.body
-    const userEmail = userEmail.value
-    fetch(`http://localhost:5500/api/users`)
-    .catch(console.log({ error }))
-    .then(data => data.json())
-    .then(checkEmail => {
-        userEmail 
-    }
-    )
-
-})
 */
 
 </script>

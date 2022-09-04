@@ -6,10 +6,28 @@ export const useUserStore = defineStore('user', { //on nomme le store
   state: () => ({
     // Déclaration d'une nouvelle variable / état au niveau du store concernant les tâches
      // par défaut, aucun user
+     token: undefined
   }),
   actions: {
     // Création d'une tâche qui permettra de mettre à jour la variable / l'état 'tasks'
-    login() { //savoir sur quelle page on est
+    login() { // mettre en AXIOS et enregistrer token res.json.token le mettre dans pinia
+      fetch("http://localhost:3000/api/users/login", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+            'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
+            'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+            'Cross-Origin-Resource-Policy': 'same-site'
+          }
+        })
+        .then(response => response.json())
+        .then(json => console.log(json));
+
+      },
+      
+     
+      /*//savoir sur quelle page on est
         axios.get('http://localhost:3000/api/users')
         .then (function (response) {
           console.log(response);
@@ -30,6 +48,33 @@ export const useUserStore = defineStore('user', { //on nomme le store
   
       signup(form) { 
 
+        return new Promise((resolve, reject) => { //resolve et reject : 
+          const postRequest = {
+            email: form.email,
+            password: form.password,
+            firstName: form.firstName,
+            lastName: form.lastName
+          }
+  
+          const headers = {
+            'Content-Type': 'application/json',
+          }
+  
+          axios.post('http://localhost:3000/api/users/register', postRequest, { headers })
+          .then (function (response) {
+           //le this.token = response.data.token, il faut intégrer token dans les headers vers le back
+            resolve(response);
+          })
+          .catch(function(error) {
+            reject(error);
+          })
+
+        })
+
+
+      
+        /*
+        
         fetch("http://localhost:3000/api/users/register", {
           method: "POST",
           body: JSON.stringify({
@@ -48,8 +93,10 @@ export const useUserStore = defineStore('user', { //on nomme le store
         })
         .then(response => response.json())
         .then(json => console.log(json));
+        
+        */
 
-      }
+      } 
       }})
     /*      const postRequest = {
           email: form.email,

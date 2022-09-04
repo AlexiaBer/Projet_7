@@ -1,4 +1,3 @@
-const { getVNodeBlockHelper } = require("@vue/compiler-core");
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
