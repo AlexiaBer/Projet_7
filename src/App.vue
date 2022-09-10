@@ -1,7 +1,11 @@
 <template>
 
-   <router-view> </router-view>
+<div id="app">
+  TEST ALLO EN HAUT
+   <router-view></router-view>
 
+  TEST ALLO EN BAS
+</div>
  <!--router-view ci-dessus dit à view router où afficher le composant auquel est associé la route quand on visite une url
   -->
 </template>

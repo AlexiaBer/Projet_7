@@ -1,38 +1,61 @@
 //const Post = require('../models/Post');
-const fs = require('fs');
+//const fs = require('fs');
+//const app = require('../app');
+//const auth = require('../middleware/auth');
 
-const app = require('../app');
-const auth = require('../middleware/auth');
+const db = require("../database/db.mysql");
 
-// pour AFFICHER LA LISTE DES SAUCES dans le menu "All Sauces"
+// pour AFFICHER LA LISTE DES POSTS
 exports.postsList = (req, res, next) => { 
-  Sauce.find() 
-  .then(sauces => {
-    res.status(200).json(sauces)
-  })
-  .catch(error => res.status(400).json({ error }));
+  const sqlRequest = "SELECT * FROM posts ORDER BY datetime DESC"
+  db.query(sqlRequest, (err, result) => {
+    if(err) {
+      res.status(404).json({ err });
+      throw err;
+    }
+    res.status(200).json(result); //result c'est ce que nous renvoie la requête correspond à tous les posts. il faudra l'envoyer au front
+    //en faisant une requête axios, console log le result et ça donnera le result
+  });
 };
   
-// pour AFFICHER UNE SAUCE grace à son id
+// pour AFFICHER UN POST grace à son id
 exports.findOnePost = (req, res, next) => { 
-  Sauce.findOne({ _id: req.params.id }) 
+  const sqlRequest = "SELECT * FROM posts WHERE id ="  
   .then(sauce => res.status(200).json(sauce))
   .catch(error => res.status(404).json({ error }));
 };
   
-// pour CRÉER une sauce dans le menu "Add Sauce"
+// pour CRÉER un post 
 exports.createPost = (req, res, next) => { 
-    const sauceObject = JSON.parse(req.body.sauce);
-    delete sauceObject._id; 
-    delete sauceObject._userId; 
-    const sauce = new Sauce({
-      ...sauceObject,
-      userId: req.auth.userId,
-      imageUrl : `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });    
-    sauce.save()
-    .then(() => res.status(201).json({ message: "Sauce créée", sauce: sauce}))
-    .catch (error => res.status(400).json({ error })); 
+  console.log(req.body);
+  let { body, file } = req;
+  if(!file) delete req.body.image;
+  body = {
+    ...body, 
+    likes:"",
+  };
+
+  const sqlInsert = "INSERT INTO posts SET ?"; //permet d'éviter les injections SQL.
+  db.query(sqlInsert, body, (err, result) => {
+    if(err) {
+      console.log(err);
+      res.status(404).json ({ err });
+      throw err;
+    }
+
+    const post_id = result.insertId;
+    if (file) {
+      const sqlInsertImage = "INSERT INTO images (" // voir vidéo onpenchcicken 22:25 explication
+      db.query(sqlInsertImage, (err, result) => {
+        if(err) {
+          console.log(err);
+          res.status(404).json({ err });
+          throw err;
+        }
+        res.status(200).json({ message : "Post successfully added"})
+      });
+    }
+  });
 };
 
 // pour MODIFIER un post sur la page-même du post (créateur du post seulement)

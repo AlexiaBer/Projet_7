@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 
 const path = require('path');
 
-const userRoutes = require('./routes/user');
-const postRoutes = require('./routes/post');
+//const userRoutes = require('./');
+//const postRoutes = require('./routes/post');
 
 //const cors = require('cors');
 const app = express();
@@ -47,8 +47,8 @@ app.use((req, res) => {
 
 app.use(bodyParser.json());
 
-app.use('/api/users', userRoutes); //la base de l'url pour toutes les routes concernant les users
-app.use('/api/posts', postRoutes); //la base de l'url pour toutes les routes concernant les posts
+//app.use('/api/users', userRoutes); //la base de l'url pour toutes les routes concernant les users
+//app.use('/api/posts', postRoutes); //la base de l'url pour toutes les routes concernant les posts
 
 //app.use('/images', express.static(path.join(__dirname, 'images')));
 

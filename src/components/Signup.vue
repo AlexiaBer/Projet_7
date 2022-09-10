@@ -1,23 +1,25 @@
 <template>
-  
-    <header class="header">
-        <nav> <a href="../Home.vue">Retour accueil</a></nav>
-        <img alt="logo du réseau social Groupomania" src="../assets/small-transp-rectangle-black-icon.png">
-    </header>
-  
-    <h2>Venez échanger avec vos collègues de travail !</h2>
-    <p>Inscription</p>
+  <header class="header">
+    <nav><a href="../Home.vue">Retour accueil</a></nav>
+    <img
+      alt="logo du réseau social Groupomania"
+      src="../assets/small-transp-rectangle-black-icon.png"
+    />
+  </header>
 
-    <div class="form">
-      <div>
-        <input
-          type="text"
-          placeholder="Nom"
-          name="lastname"
-          v-model="lastName"
-          class="lastname"
-          required
-        />
+  <h2>Venez échanger avec vos collègues de travail !</h2>
+  <p>Inscription</p>
+
+  <div class="form">
+    <div>
+      <input
+        type="text"
+        placeholder="Nom"
+        name="lastname"
+        v-model="lastName"
+        class="lastname"
+        required
+      />
     </div>
 
     <div>
@@ -51,14 +53,18 @@
     </div>
 
     <div>
-      <button @click="saveUser" type="submit" id="submit">Créez un compte</button>
+      <button @click="saveUser" type="submit" id="submit">
+        Créez un compte
+      </button>
     </div>
   </div>
 </template>
-<script>
 
+<script>
 import { useUserStore } from "../stores/user";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 export default {
   setup() {
     // props : passer des données du parent vers l'enfant. ctx : passer des données de l'enfant vers le parent
@@ -68,26 +74,23 @@ export default {
     const email = ref("");
     const password = ref(""); //anciennement tous "let"
 
+    const router = useRouter();
+
     const saveUser = function () {
-      console.log(
-        lastName.value + firstName.value + email.value + password.value
-        ),
-        useUserStore().signup({
-          lastName: lastName.value,
-          firstName: firstName.value,
-          email: email.value,
-          password: password.value,
-        })
-        .then((data) => {
-          console.log(data);
-          //redirection new page ICI
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        
-        ;
-      
+        useUserStore()
+          .signup({ //ci-dessous, toutes les données que j'envoie au store USER
+            lastName: lastName.value,
+            firstName: firstName.value,
+            email: email.value,
+            password: password.value,
+          })
+          .then((data) => { //c'est la suite de la promise présente dans le store USER
+            console.log(data);
+            router.push({name:"login"})
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     };
     return {
       //on retourne ce qu'on veut rendre disponible
@@ -96,73 +99,61 @@ export default {
       email,
       password,
       saveUser,
-      useUserStore
+      useUserStore,
     };
   },
 };
 
-// RECUPERER LES DONNEES DE L'API POUR LES TRANSFERER DANS LA BDD
-
-/*
-
-fetch("http://localhost:5500/api/users")
-.catch(error => console.log(error))
-.then(data => data.json())
-.then(nomDeMaFonction => {
-    la fonction qui envoie les données vers la BDD SQL.
-})
-*/
 </script>
 
 <style scoped>
 h2 {
-  padding-top:30px;
-  color: #FFD7D7;
+  padding-top: 30px;
+  color: #ffd7d7;
 }
 
 body {
-    background-color:#4E5166;
+  background-color: #4e5166;
 }
 
 a {
-    color:#4E5166;
+  color: #4e5166;
 }
 
 .header {
-  display:flex;
+  display: flex;
   justify-content: space-between;
-  background-color:#FFD7D7;
-  color:#4E5166;
-  padding:0px 30px;
+  background-color: #ffd7d7;
+  color: #4e5166;
+  padding: 0px 30px;
 }
 
 .form {
-    color:white;
-    display:flex;
-    flex-direction: column;
-    gap:20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 ::placeholder {
-  color:#4E5166;
+  color: #4e5166;
   font-weight: bold;
   font-size: 16px;
-  margin:30px;
-  text-align:center;
+  margin: 30px;
+  text-align: center;
 }
 
 input {
-  padding:10px;
-  border-radius:8px;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 button {
-  background-color:#FD2D01;
-  color:#4E5166;
-  padding:15px;
+  background-color: #fd2d01;
+  color: #4e5166;
+  padding: 15px;
   font-weight: bold;
   border-radius: 30px;
-  font-size:16px;
+  font-size: 16px;
 }
-
 </style>

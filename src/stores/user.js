@@ -1,79 +1,100 @@
-import { defineStore } from 'pinia' //crée le store
+import { defineStore } from "pinia"; //crée le store
 
-import axios from 'axios';
+import axios from "axios";
 
-export const useUserStore = defineStore('user', { //on nomme le store
+export const useUserStore = defineStore("user", { // le store fait les requêtes vers le backend, centralise tous les appels 
+  //centralise les données, les rend dynamiques
+  //on nomme le store
   state: () => ({
-    // Déclaration d'une nouvelle variable / état au niveau du store concernant les tâches
-     // par défaut, aucun user
-     token: undefined
+    // Déclaration d'une nouvelle variable / état du store
+    // par défaut, aucun user
+    token: undefined,
   }),
   actions: {
     // Création d'une tâche qui permettra de mettre à jour la variable / l'état 'tasks'
-    login() { // mettre en AXIOS et enregistrer token res.json.token le mettre dans pinia
-      fetch("http://localhost:3000/api/users/login", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json; charset=UTF-8",
-            'Access-Control-Allow-Origin':'*',
-            'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization',
-            'Access-Control-Allow-Methods' : 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-            'Cross-Origin-Resource-Policy': 'same-site'
-          }
-        })
-        .then(response => response.json())
-        .then(json => console.log(json));
 
-      },
-      
-     
-      /*//savoir sur quelle page on est
-        axios.get('http://localhost:3000/api/users')
+    login(form) { 
+      return new Promise((resolve, reject) => { //la fonction login retourne une promesse qui retourne un objet
+        const postRequest = {
+          email: form.email,
+          password: form.password
+        };
+       // const token = headers.token;
+        const headers = {
+          "Content-Type": "application/json",
+//          "Authorization": "Bearer" + token, ça c'est côté back je crois
+        };
+
+        axios.post("http://localhost:3000/api/users/login", postRequest, { // appel vers le back
+            headers
+          })
+          .then(response => {
+            this.token = response.data.token // il faut intégrer token dans les headers vers le back
+            resolve(); //l'action login est terminée quand le server nous a retourné la réponse.
+          })
+          .catch( error => {
+            reject(error);
+          });
+      });
+    },
+
+    signup(form) {
+
+      return new Promise((resolve, reject) => { 
+        const postRequest = {
+          email: form.email,
+          password: form.password,
+          firstname: form.firstname,
+          lastname: form.lastname
+        }
+
+        const headers = {
+          'Content-Type': 'application/json',
+        }
+
+        axios.post('http://localhost:3000/api/users/register', postRequest, { headers })
         .then (function (response) {
-          console.log(response);
+         //le this.token = response.data.token, il faut intégrer token dans les headers vers le back
+          resolve(response);
         })
         .catch(function(error) {
-          console.log(error);
+          reject(error);
         })
-      },
-  /*    axios({
-            method: 'get',
-            url: 'http://localhost:3000/api/users',
-            responseType: 'json'
-          })
-            .then(function (response) {
-              console.log(response.data)
-            });
-*/
-  
-      signup(form) { 
 
-        return new Promise((resolve, reject) => { //resolve et reject : 
-          const postRequest = {
-            email: form.email,
-            password: form.password,
-            firstName: form.firstName,
-            lastName: form.lastName
-          }
-  
-          const headers = {
-            'Content-Type': 'application/json',
-          }
-  
-          axios.post('http://localhost:3000/api/users/register', postRequest, { headers })
-          .then (function (response) {
-           //le this.token = response.data.token, il faut intégrer token dans les headers vers le back
+      })
+
+    },
+  },
+});
+ /*     return new Promise((resolve, reject) => {
+        //resolve et reject :
+        const postRequest = {
+          email: form.email,
+          password: form.password,
+          firstName: form.firstName,
+          lastName: form.lastName,
+        };
+
+        const headers = {
+          "Content-Type": "application/json"
+        };
+
+        axios
+          .post("http://localhost:3000/api/users/register", postRequest, {
+            headers
+          })
+          .then(function (response) {
+            //le this.token = response.data.token, il faut intégrer token dans les headers vers le back
             resolve(response);
           })
-          .catch(function(error) {
+          .catch(function (error) {
             reject(error);
-          })
+          });
+      });
 
-        })
 
-
-      
-        /*
+      */
+      /*
         
         fetch("http://localhost:3000/api/users/register", {
           method: "POST",
@@ -96,9 +117,7 @@ export const useUserStore = defineStore('user', { //on nomme le store
         
         */
 
-      } 
-      }})
-    /*      const postRequest = {
+/*      const postRequest = {
           email: form.email,
           password: form.password,
           firstName: form.firstName,

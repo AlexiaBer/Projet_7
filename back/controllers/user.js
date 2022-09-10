@@ -14,39 +14,63 @@ const bodyParser = require("body-parser");
 //pour OBTENIR LA LISTE DES UTILISATEURS
 
 // pour CRÉER UN COMPTE
-exports.signUp = async (req, res) => {
+exports.signup = async (req, res) => {
   //req.setHeader('Content-Type', 'application/json');
   const { firstname, lastname, email, password } = req.body;
+  const newUser = new User(firstname, lastname, email, password);
+  const cryptedEmail = newUser.emailCrypting();
 
-  const cryptedEmail = cryptoJs
-    .HmacSHA256(email, `${process.env.CRYPTOJS_CLE_EMAIL}`)
-    .toString(); // je crypte l'e-mail de l'utilisateur avant de l'envoyer dans la BDD
+  newUser
+  .passwordHashing()
+  .then((hash) => {
+   console.log("hash" + hash) 
 
+   const data = {
+    firstname, 
+    lastname, 
+    email: cryptedEmail, 
+    password: hash
+   }
+
+   console.log(data);
+
+   db.query("INSERT INTO users SET ?", data, (error, results, fields) => {
+    if (error) {
+      console.log(error);
+      res.status(400).json({ error });
+    } else {
+      console.log("results" + results);
+      res.status(201).json({ message: "utilisateur créé" });
+    }
+  });
+  })
+  .catch((err) => res.status(500).json({ err }).send(console.log(err)));
+
+
+  //const cryptedEmail = cryptoJs
+  //  .HmacSHA256(email, `${process.env.CRYPTOJS_CLE_EMAIL}`)
+  //  .toString(); // je crypte l'e-mail de l'utilisateur avant de l'envoyer dans la BDD
+
+}
+/*
   bcrypt
     .hash(password, 10) // je crypte son mdp également dans la BDD
     .then((hash) => {
       console.log("CryptedEmail et hash" + cryptedEmail + hash);
-      const newUser = {
+
+      {
         firstname, 
         lastname, 
         email : cryptedEmail,
         password : hash,
         role:2
       }
-  
-      db.query("INSERT INTO users SET ?", newUser, (error, results, fields) => {
-        if (error) {
-          console.log(error);
-          res.status(400).json({ error });
-        } else {
-          console.log("results" + results);
-          res.status(201).json({ message: "utilisateur créé" });
-        }
-      });
+  */ 
+ /*
     })
     .catch((error) => res.status(500).json({ error }).send(console.log(error)));
 };
-
+*/
 // pour SE CONNECTER à son compte
 module.exports.login = async (req, res) => {
 
