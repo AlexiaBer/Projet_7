@@ -15,7 +15,6 @@ const bodyParser = require("body-parser");
 
 // pour CRÉER UN COMPTE
 exports.signup = async (req, res) => {
-  //req.setHeader('Content-Type', 'application/json');
   const { firstname, lastname, email, password } = req.body;
   const newUser = new User(firstname, lastname, email, password);
   const cryptedEmail = newUser.emailCrypting();
@@ -26,11 +25,12 @@ exports.signup = async (req, res) => {
    console.log("hash" + hash) 
 
    const data = {
-    firstname, 
-    lastname, 
+    firstname:firstname, 
+    lastname:lastname, 
     email: cryptedEmail, 
-    password: hash
-   }
+    password: hash,
+    role:2
+   };
 
    console.log(data);
 

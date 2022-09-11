@@ -45,7 +45,7 @@ export const useUserStore = defineStore("user", { // le store fait les requêtes
           email: form.email,
           password: form.password,
           firstname: form.firstname,
-          lastname: form.lastname
+          lastname: form.lastname,
         }
 
         const headers = {

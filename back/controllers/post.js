@@ -1,12 +1,15 @@
-//const Post = require('../models/Post');
+const Post = require('../models/Post');
 //const fs = require('fs');
 //const app = require('../app');
 //const auth = require('../middleware/auth');
 
+const app = require("../app");
 const db = require("../database/db.mysql");
 
+const bodyParser = require("body-parser");
+
 // pour AFFICHER LA LISTE DES POSTS
-exports.postsList = (req, res, next) => { 
+exports.postsList = async (req, res) => { 
   const sqlRequest = "SELECT * FROM posts ORDER BY datetime DESC"
   db.query(sqlRequest, (err, result) => {
     if(err) {
@@ -21,21 +24,36 @@ exports.postsList = (req, res, next) => {
 // pour AFFICHER UN POST grace à son id
 exports.findOnePost = (req, res, next) => { 
   const sqlRequest = "SELECT * FROM posts WHERE id ="  
-  .then(sauce => res.status(200).json(sauce))
+  .then(post => res.status(200).json(post))
   .catch(error => res.status(404).json({ error }));
 };
   
 // pour CRÉER un post 
-exports.createPost = (req, res, next) => { 
+exports.createPost = async (req, res) => { 
+  const { title, content } = req.body;
   console.log(req.body);
-  let { body, file } = req;
-  if(!file) delete req.body.image;
-  body = {
-    ...body, 
-    likes:"",
+  let newPost = new Post(title, content);
+  //if(!file) delete req.body.image;
+
+  const data = {
+    title, 
+    content,
   };
 
-  const sqlInsert = "INSERT INTO posts SET ?"; //permet d'éviter les injections SQL.
+  console.log(data);
+
+  db.query("INSERT INTO posts SET ?", data, (error, results, fields) => {
+    if(error) {
+      console.log(error);
+      res.status(400).json({ error });
+    } else {
+      console.log("results" + results);
+      res.status(201).json({ message : "post créé"});
+    }
+  });
+}
+
+/*  const sqlInsert = "INSERT INTO posts SET ?"; //permet d'éviter les injections SQL.
   db.query(sqlInsert, body, (err, result) => {
     if(err) {
       console.log(err);
@@ -57,7 +75,7 @@ exports.createPost = (req, res, next) => {
     }
   });
 };
-
+*/
 // pour MODIFIER un post sur la page-même du post (créateur du post seulement)
 exports.modifyPost = (req, res, next) => { 
   const sauceObject = req.file ? { 

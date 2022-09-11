@@ -79,15 +79,14 @@ export default {
     const saveUser = function () {
         useUserStore()
           .signup({ //ci-dessous, toutes les données que j'envoie au store USER
-            lastName: lastName.value,
-            firstName: firstName.value,
+            lastname: lastName.value,
+            firstname: firstName.value,
             email: email.value,
             password: password.value,
           })
-          .then((data) => { //c'est la suite de la promise présente dans le store USER
-            console.log(data);
-            router.push({name:"login"})
-          })
+          .then(() => {
+              router.push({ name: "login" });
+            })
           .catch((error) => {
             console.log(error);
           });
