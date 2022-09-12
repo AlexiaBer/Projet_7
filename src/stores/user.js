@@ -15,7 +15,7 @@ export const useUserStore = defineStore("user", { // le store fait les requêtes
 
     login(form) { 
       return new Promise((resolve, reject) => { //la fonction login retourne une promesse qui retourne un objet
-        const postRequest = {
+        const loginPostRequest = {
           email: form.email,
           password: form.password
         };
@@ -25,7 +25,7 @@ export const useUserStore = defineStore("user", { // le store fait les requêtes
 //          "Authorization": "Bearer" + token, ça c'est côté back je crois
         };
 
-        axios.post("http://localhost:3000/api/users/login", postRequest, { // appel vers le back
+        axios.post("http://localhost:3000/api/users/login", loginPostRequest, { // appel vers le back
             headers
           })
           .then(response => {
@@ -41,7 +41,7 @@ export const useUserStore = defineStore("user", { // le store fait les requêtes
     signup(form) {
 
       return new Promise((resolve, reject) => { 
-        const postRequest = {
+        const signupPostRequest = {
           email: form.email,
           password: form.password,
           firstname: form.firstname,
@@ -52,7 +52,7 @@ export const useUserStore = defineStore("user", { // le store fait les requêtes
           'Content-Type': 'application/json',
         }
 
-        axios.post('http://localhost:3000/api/users/register', postRequest, { headers })
+        axios.post('http://localhost:3000/api/users/register', signupPostRequest, { headers })
         .then (function (response) {
          //le this.token = response.data.token, il faut intégrer token dans les headers vers le back
           resolve(response);

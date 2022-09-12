@@ -5,10 +5,8 @@
       src="../assets/small-transp-rectangle-black-icon.png"
     />
     <nav>
-
-        <i class="fa-solid fa-user"></i>
-        <a href="#"><i class="fa-solid fa-user"></i> Mon compte</a> | 
-        <a href="">Se déconnecter <i class="fa-solid fa-right-from-bracket"></i></a>
+        <a href="#"> Mon compte</a> | 
+        <a href="">Se déconnecter</a>
     </nav>
   </header>
 
@@ -24,17 +22,17 @@
                 <input type="text" class="content" placeholder="Qu'avez-vous à raconter ?" v-model="content">
                 <button @click="addPost" type="submit">Envoyer mon post</button>
             </div>
-            <div class=""></div>
+            <button @click="showPosts" type="submit"> showPosts</button>
         </div>
 
-        <p v-for="post in posts" :key="post.id">
-            {{ post.title }}
-            {{ post.content }}
-            {{ usePostStore.posts}}
-        </p>
+  
         
+        <p>
+
+        </p>
         <br />
-        POST 2
+        ci-dessous, posts
+
         <br />
         POST 3
     </div>
@@ -49,23 +47,25 @@ const postStore = usePostStore();
 
 export default {
     setup() { 
-        let title = ref("");
-        let content = ref("");
-        let posts = ref([""]);
+        const title = ref("");
+        const content = ref("");
+       // const posts = [];
+     //  let posts = ref([]);
         
         const addPost = function() {
             usePostStore()
             .addPost({
-                title:title.value,
+                title: title.value,
                 //user_id: ?,
                 //datetime: ?, comportement auto ? comme l'auto increment ? à vérifier
-                content:content.value,
+                content: content.value,
                 //image: ?
             })
             .then(()=> {
-                this.posts.push({title: this.title, content: this.content});
-                console.log(addPost.title, addPost.content)
-                console.log(posts) 
+              console.log("Post envoyé");
+              console.log(postStore.posts);
+       //       posts.push({title:title.value, content:content.value});
+       //       console.log("posts :" + JSON.stringify(posts))
             })
             .catch((error) => {
                 console.log(error)
@@ -74,9 +74,10 @@ export default {
 
         const showPosts = function() {
             usePostStore()
-            .getList    
+            .getList()
             .then(()=> {
                 console.log("getList ici")
+ 
             })
             .catch((error) => {
                 console.log(error)
@@ -88,8 +89,10 @@ export default {
           content,
           usePostStore,
           addPost,
-          posts,
-          showPosts
+   //       posts,
+          showPosts,
+          postStore,
+        //  getList
        }
     }
 }
